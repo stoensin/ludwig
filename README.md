@@ -4,26 +4,58 @@ Ludwig
 Introduction
 ------------
 
-Ludwig is a toolbox built on top of TensorFlow that allows to train and test deep learning models without the need to write code.
+让代码的归代码，让AI的归AI。
 
-All you need to provide is a CSV file containing your data, a list of columns to use as inputs, and a list of columns to use as outputs, Ludwig will do the rest.
-Simple commands can be used to train models both locally and in a distributed way, and to use them to predict on new data.
+在不写代码就能进行AI开发的道路上，Uber今日又往前踏了一步。
 
-A programmatic API is also available in order to use Ludwig from your python code.
-A suite of visualization tools allows you to analyze models' training and test performance and to compare them.
+刚刚，Uber宣布开源Ludwig，一个基于TensorFlow的工具箱。
 
-Ludwig is built with extensibility principles in mind and is based on data type abstractions, making it easy to add support for new data types as well as new model architectures.
+有了它，不用写代码就能够训练和测试深度学习模型。
 
-It can be used by practitioners to quickly train and test deep learning models as well as by researchers to obtain strong baselines to compare against and have an experimentation setting that ensures comparability by performing standard data preprocessing and visualization.
+Uber表示，对于AI开发者来说，Ludwig可以帮助他们更好地理解深度学习方面的能力，并能够推进模型快速迭代。
 
-Ludwig provides a set of model architectures that can be combined together to create an end-to-end model for a given use case. As an analogy, if deep learning libraries provide the building blocks to make your building, Ludwig provides the buildings to make your city, and you can chose among the available buildings or add your own building to the set of available ones.
+对于AI专家来说，Ludwig可以简化原型设计和数据处理过程，从而让他们能够专注于开发深度学习模型架构。
 
-The core design principles we baked into the toolbox are:
-- No coding required: no coding skills are required to train a model and use it for obtaining predictions.
-- Generality: a new data type-based approach to deep learning model design that makes the tool usable across many different use cases.
-- Flexibility: experienced users have extensive control over model building and training, while newcomers will find it easy to use.
-- Extensibility: easy to add new model architecture and new feature data types.
-- Understandability: deep learning model internals are often considered black boxes, but we provide standard visualizations to understand their performance and compare their predictions.
+训练只需数据文件和配置文件
+Ludwig提供了一套AI架构，可以组合起来，为给定的用例创建端到端的模型。
+
+开始模型训练，只需要一个表格数据文件（如CSV）和一个YAML配置文件——用于指定数据文件中哪些列是输入特征，哪些列是输出目标变量。
+
+如果指定了多个输出变量，Ludwig将学会同时预测所有输出。
+
+使用Ludwig训练模型，在模型定义中可以包含附加信息，比如数据集中每个特征的预处理数据和模型训练参数， 也能够保存下来，可以在日后加载，对新数据进行预测。
+
+灵活组合，适用多种任务
+对于Ludwig支持的数据类型（文本、图像、类别等），其提供了一个将原始数据映射到张量的编码器，以及将张量映射到原始数据的解码器。张量是线性代数中使用的数据结构。
+
+内置的组合器，能够自动将所有输入编码器的张量组合在一起，对它们进行处理，并将其返回给输入解码器。
+
+Uber表示，通过组合这些特定于数据类型的组件，用户可以将Ludwig用于各种任务。比如，组合文本编码器和类别解码器，就可以获得一个文本分类器。
+
+每种数据类型有多个编码器和解码器。例如，文本可以用卷积神经网络（CNN），循环神经网络（RNN）或其他编码器编码。
+
+用户可以直接在模型定义文件中指定要使用的参数和超参数，而无需编写单行代码。
+
+基于这种灵活的编码器-解码器架构，即使是经验较少的深度学习开发者，也能够轻松地为不同的任务训练模型。
+
+比如文本分类、目标分类、图像字幕、序列标签、回归、语言建模、机器翻译、时间序列预测和问答等等。
+
+多种功能，不断拓展
+为了让工具变得更好用，Ludwig还提供了各种工具：
+
+用于训练、测试模型和获得预测的命令行程序；
+
+用于评估模型并通过可视化比较预测结果的工具；
+
+用于用户训练或加载模型，并获得对新数据预测的Python编程API。
+
+此外，Ludwig还能够使用开源分布式培训框架Horovod，在多个GPU上训练模型，并快速迭代。
+
+目前，Ludwig有用于二进制值，浮点数，类别，离散序列，集合，袋（bag），图像，文本和时间序列的编码器和解码器，并且支持选定的预训练模型。
+
+Uber表示，未来将为每种数据类型添加几个新的编码器，比如用于文本的Transformer，ELMo和BERT，以及用于图像的DenseNet和FractalNet。
+
+还将添加其他的数据类型，比如音频、点云和图形，同时集成更多可扩展的解决方案来管理大数据集，如Petastorm。
 - Open Source: Apache License 2.0
 
 
